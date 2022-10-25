@@ -1,2 +1,52 @@
-<body onkeypress="add()">
-</body>
+<html>
+     <style>
+      .body {
+  background: black;
+}
+.p {
+  color: green;
+}
+    </style>
+  <body class='body' onkeydown="process(event)">
+<input type="file" class="file" />
+<p class='p' id='z'></p>
+<p class='p' id='y'></p>
+    <body>
+<script>
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function process(event) {
+  if (document.getElementById("y").innerHTML === 'undefined' || 0) {
+    var y = 3;
+  } else if (document.getElementById("y").innerHTML !== 'undefined') {
+    var y = (document.getElementById("y").innerHTML + 1);
+  }
+  var files = event.target.files
+  var reader = new FileReader()
+  reader.onload = function() {
+    var contents = this.result
+async function demo() {
+    for (let j = 0; j < y; j++) {
+      if( j % 5 == 0) {
+        await sleep(10);
+      }
+      document.getElementById("y").innerHTML = j
+      console.log(contents.substr(j, 1));
+      let x = contents.substr(j, 1)
+      document.getElementById("z").innerHTML += (x);
+
+    }
+  }
+  demo();
+}
+
+  reader.readAsText(files[0])
+}
+
+var input = document.querySelector('.file')
+input.addEventListener('change', process, false)
+
+</script>
+</html>
