@@ -1,28 +1,13 @@
 <html>
-     <style>
-      .body {
-  background: black;
-}
-.p {
-  color: green;
-}
-    </style>
-  <body class='body' onkeydown="process(event)">
-<input type="file" class="file" />
-<p class='p' id='z'></p>
-<p class='p' id='y'></p>
-    <body>
-<script>
-  function sleep(ms) {
+     <script>
+          function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+function setter() {
+  document.getElementById("y").innerHTML = 10;
+}
 function process(event) {
-  if (document.getElementById("y").innerHTML === 'undefined' || 0) {
-    var y = 3;
-  } else if (document.getElementById("y").innerHTML !== 'undefined') {
-    var y = (document.getElementById("y").innerHTML + 1);
-  }
+  var y = document.getElementById("y").innerHTML;
   var files = event.target.files
   var reader = new FileReader()
   reader.onload = function() {
@@ -32,7 +17,7 @@ async function demo() {
       if( j % 5 == 0) {
         await sleep(10);
       }
-      document.getElementById("y").innerHTML = j
+      document.getElementById("y").innerHTML += j;
       console.log(contents.substr(j, 1));
       let x = contents.substr(j, 1)
       document.getElementById("z").innerHTML += (x);
@@ -47,6 +32,20 @@ async function demo() {
 
 var input = document.querySelector('.file')
 input.addEventListener('change', process, false)
-
-</script>
+     </script>
+     <style>
+          .body {
+  background: black;
+}
+.p {
+  color: green;
+}
+     </style>
+  <body class='body' onkeydown="process(event)" onload="setter()">
+<input type="file" class="file"/>
+<div class='p'>
+<p id='z'></p>
+<p id='y'></p>
+    </div>
+    <body>
 </html>
