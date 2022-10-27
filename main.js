@@ -8,8 +8,8 @@ function process(event) {
       var code = x;
             var i = 0;
             document.addEventListener("keydown", function (){
-                terminal.innerText += code.slice(i, i+3);
-                i += 3;
+                terminal.innerText += code.slice(i, i+5);
+                i += 5;
                 if (i > code.length) {i=0;}
             });
             setInterval(function (){
